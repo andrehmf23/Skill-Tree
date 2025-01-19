@@ -2,11 +2,21 @@ class TreeNode:
     def __init__(self, data):
         self.parent = None
         self.data = data
-        self.children = []
+        self.children: TreeNode = []
         
     def add_child(self, child):
         child.parent = self
         self.children.append(child)
+    
+    def find_child(self, data):
+        if self.data == data:
+            return self
+        for child in self.children:
+            child.find_child(data)
+        return None
+    
+    def remove_child(self, data):
+        del self.find_child(data)
     
     def count(self):
         i = 0
