@@ -11,12 +11,14 @@ def build_product_tree():
 
 def app():
     tree = build_product_tree()
-    tree.show()
-    json = tree.get_json()
     fm = FileManager('data')
-    fm.save(json)
-    json = None
-    json = fm.load()
-    print(json["data"])
+    fm.save(tree.get_json())
+    
+    tree.remove('128gb')
+    tree.show()
+    
+    tree.set_json(fm.load())
+    tree.show()
+    
     
     pass

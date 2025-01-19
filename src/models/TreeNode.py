@@ -49,14 +49,10 @@ class TreeNode:
         for child in self.children:
             child.show_tree(levels + 1)
     
-    def get_json(self, json):
-        
-        children = []
-        for child in self.children:
-            children.append(child.data) 
+    def get_json(self, json, parent=None):
             
-        json["data"].append({'data': self.data, 'children': children})
+        json["data"].append({'data': self.data, 'parent': parent})
         
         for child in self.children:
-            child.get_json(json)
+            child.get_json(json, self.data)
             

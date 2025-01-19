@@ -58,17 +58,18 @@ class Tree:
     
     #ALERT ERROR
     def set_json(self,json):
-        root = None
-        for node in json["data"]:
-            root = TreeNode(node["data"])
-            children = node["children"]
-            
-            for child in children:
-                root.add_child(TreeNode(child))
+        if len(json["data"]) > 0:
+            self.root = TreeNode(json["data"].pop(0)['data'])
+            for child in json['data']:
+                if child['data'] != None:
+                    self.root.find(child['parent']).add_child(TreeNode(child['data']))
+        else:
+            print("Dados de JSON vazios!")
             
     
     # Mostrar árvore
     def show(self):
         if not self.is_none(): return
         
+        print("SHOW")
         self.root.show_tree()
