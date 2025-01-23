@@ -7,7 +7,7 @@ class Tree:
     
     # Árvore Existe
     def is_none(self):
-        return self.root != None
+        return self.root == None
     
     # Nome da árvore
     def name(self, name: str):
@@ -15,8 +15,8 @@ class Tree:
     
     # Adicionar nó
     def add(self, data: str, newnode: str = None):
-        if not self.is_none():
-            self.root = TreeNode(data)
+        if self.is_none():
+            self.root = TreeNode(newnode)
         elif newnode == None:
             print("Nó vazio!")
         else:
@@ -28,7 +28,7 @@ class Tree:
     
     # Remover nó
     def remove(self, data: str):
-        if not self.is_none(): return
+        if self.is_none(): return
         
         if self.root.data == data:
             self.root = None
@@ -37,15 +37,15 @@ class Tree:
     
     # Contar nós
     def count(self):
-        if not self.is_none(): return 0
+        if self.is_none(): return 0
         
         return self.root.count()
     
     # Verifica se nó existe
-    def exist(self):
-        if not self.is_none(): return False
+    def exist(self, value: str):
+        if self.is_none(): return False
         
-        return self.root.exist()
+        return self.root.exist(value)
     
     def get_json(self):
         json = {
@@ -53,6 +53,8 @@ class Tree:
                 
             ]
         }
+        
+        if self.is_none(): return json
         self.root.get_json(json)
         return json
     
@@ -68,8 +70,8 @@ class Tree:
             
     
     # Mostrar árvore
-    def show(self):
-        if not self.is_none(): return
+    def show_levels(self):
+        if self.is_none(): return
         
         print("SHOW")
-        self.root.show_tree()
+        self.root.show_levels()

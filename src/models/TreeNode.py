@@ -16,12 +16,12 @@ class TreeNode:
     
     def exist(self, data):
         
-        if self.data == None:
+        if self.data == data:
             return True
         
         found = False
         for child in self.children:
-            found = found or child.find(data)
+            found = found or child.exist(data)
         
         return found
     
@@ -42,12 +42,12 @@ class TreeNode:
             i = i + child.count()
         return i + 1
     
-    def show_tree(self, levels: int = 0):
+    def show_levels(self, levels: int = 0):
         
         print('+' * levels + f'[{self.data}]')
         
         for child in self.children:
-            child.show_tree(levels + 1)
+            child.show_levels(levels + 1)
     
     def get_json(self, json, parent=None):
             
